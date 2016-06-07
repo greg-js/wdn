@@ -13,7 +13,7 @@ So please don't send me your Node-hatemail and do use the excellent [wd](https:/
 First install the package:
 
 ```
-npm install -g @greg-js/wdn
+npm install -g greg-js/wdn
 ```
 
 Then put this in your `.bashrc`/`.zshrc`:
