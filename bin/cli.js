@@ -32,8 +32,10 @@ const firstArg = (options._.length) ? options._[0] : null;
 if (keywords.includes(firstArg)) {
   if (/^help$|^h$/.test(firstArg)) {
     options.help = options.h = true;
+    options._ = options._.slice(1);
   } else if (/^version|^v$/.test(firstArg)) {
     options.version = options.v = true;
+    options._ = options._.slice(1);
   } else if (/^list|^ls$/.test(firstArg)) {
     options.list = options.ls = true;
     options._ = options._.slice(1);

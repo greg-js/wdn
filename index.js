@@ -1,7 +1,6 @@
 const add = require('./lib/add');
 const remove = require('./lib/remove');
 const list = require('./lib/list');
-const warp = require('./lib/warp');
 
 const displayVersion = () => {
   console.log(`wdn v${require('./package.json').version}`);
@@ -23,7 +22,5 @@ module.exports = (options) => {
     add(options.add, options.args);
   } else if (options.remove) {
     remove(options.remove);
-  } else if (options.args.length) {
-    warp(options.args);
   }
 }
