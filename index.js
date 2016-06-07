@@ -1,9 +1,11 @@
+const chalk = require('chalk');
+
 const add = require('./lib/add');
 const remove = require('./lib/remove');
 const list = require('./lib/list');
 
 const displayVersion = () => {
-  console.log(`wdn v${require('./package.json').version}`);
+  console.log(`wdn v${chalk.gray(require('./package.json').version)}`);
 }
 
 const displayHelp = () => {
@@ -22,5 +24,8 @@ module.exports = (options) => {
     add(options.add, options.args);
   } else if (options.remove) {
     remove(options.remove);
+  } else {
+    console.error(chalk.red('Invalid syntax.\n'));
+    displayHelp();
   }
 }
