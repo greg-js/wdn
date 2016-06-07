@@ -44,6 +44,14 @@ wdn add NAME DESTINATION
 
 For example, `wdn add tmp /tmp` or `wdn add proj ~/dev/myproject`
 
+You don't need the destination argument. If you don't pass it, `wdn` will assume you want to save the current working directory. So let's say you're currently in `~/downloads` on the command line and you run this command:
+
+```
+wdn add down
+```
+
+This will add the `down` warp point and set it to `~/downloads`
+
 ### list
 
 ```
