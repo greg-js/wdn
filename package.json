@@ -1,0 +1,28 @@
+{
+  "name": "wdn",
+  "version": "1.0.0",
+  "description": "warp directory - node edition",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "wd": "./bin/cli.js"
+  },
+  "keywords": [
+    "wd",
+    "warp",
+    "commandline",
+    "navigation"
+  ],
+  "author": "Gregory Scheerlinck",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.0"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "minimist": "^1.2.0",
+    "node-persist": "0.0.11"
+  }
+}
