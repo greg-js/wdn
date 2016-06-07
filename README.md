@@ -20,7 +20,7 @@ Then put this in your `.bashrc`/`.zshrc`:
 
 ```
 wdn() {
-  source $(npm root -g)/@greg-js/wdn/bin/wdn.sh
+  source $(npm root -g)/wdn/bin/wdn.sh
 }
 ```
 
