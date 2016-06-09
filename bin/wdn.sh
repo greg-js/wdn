@@ -4,7 +4,7 @@
 WD=`dirname $0`
 
 # detect keywords : help, version, list, add, remove
-if [[ $1 =~ ^\-?\-?help$\|^\-?\-?h$\|^\-?\-?version$\|^\-?\-?v$\|^\-?\-?list$\|^\-?\-?ls$\|^\-?\-?add$\|^\-?\-?a$\|^\-?\-?remove$\|^\-?\-?rm$ ]]; then
+if [[ $1 =~ ^\-?\-?help$\|^\-?\-?h$\|^\-?\-?version$\|^\-?\-?v$\|^\-?\-?list$\|^\-?\-?ls$\|^\-?\-?add$\|^\-?\-?a$\|^\-?\-?remove$\|^\-?\-?rm$\|^\-?\-?clear$ ]]; then
   node ${WD}/cli.js $@
 else
   DIR="$(node ${WD}/../lib/warp.js $@)"

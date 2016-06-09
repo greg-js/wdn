@@ -6,7 +6,8 @@ const defaults = {
   boolean: [
     'help',
     'version',
-    'list'
+    'list',
+    'clear'
   ],
   alias: {
     h: 'help',
@@ -19,11 +20,13 @@ const defaults = {
     help: false,
     version: false,
     list: false,
+    clear: false,
     add: null,
     remove: null
   }
 };
-const keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm'];
+
+const keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear'];
 
 let options = minimist(process.argv.slice(2), defaults);
 const firstArg = (options._.length) ? options._[0] : null;
@@ -39,6 +42,9 @@ if (keywords.includes(firstArg)) {
   } else if (/^list|^ls$/.test(firstArg)) {
     options.list = options.ls = true;
     options._ = options._.slice(1);
+  } else if (/^clear$/.test(firstArg)) {
+    options.clear = true;
+    options._ = options._.slice(1);
   } else if (/^add$|^a$/.test(firstArg)) {
     options.add = options.a = options._[1];
     options._ = options._.slice(2);
@@ -53,6 +59,7 @@ wdn({
   help: options.help,
   version: options.version,
   list: options.list,
+  clear: options.clear,
   add: options.add,
   remove: options.remove
 });
