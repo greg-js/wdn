@@ -2,11 +2,14 @@
 
 `wdn` is a reimplementation of [wd](https://github.com/mfaerevaag/wd) in Node.
 
-It is currently very much a work in progress and not meant to be used yet, but feel free to test it out if you want.
+All (or almost all?) of the original software's features have now been reimplemented, but there is as of yet no reason for anyone to use this package over it. The reason is that requiring Node as a dependency for simple command line navigation is quite the stretch, even for a Node-junkie such as myself.
 
-Right now, the feature set is very basic, but the idea is to match all the features in the original package and then go beyond them. It is true that requiring Node as a dependency for simple command line navigation is a bit of a crazy idea, but when you've already got Node installed anyway, this isn't so much of a concern. Moreover, the fact of the matter is that I wanted to add certain features to `wd` which would have been well beyond my capabilities as a `bash`/`zsh` scripter.
+Eventually though, I will attempt to implement extra features, which would be a nightmare to deal with in `bash`/`zsh`, the language the original package was written in.
 
-So please don't send me your Node-hatemail and do use the excellent [wd](https://github.com/mfaerevaag/wd) if you use `zsh` and want a fun and light way to jump around the command line. Hopefully, the reason for reimplenting this in Node will become clear once I start adding the more interesting features I have in mind for this package.
+So please don't send me your Node-hatemail and do use the excellent [wd](https://github.com/mfaerevaag/wd) if you use `zsh` and want a fun and light way to jump around the command line.
+
+Hopefully, the reason for reimplenting this in Node will become clear once I start adding the more interesting features I have in mind for this package.
+
 
 ## installation
 
@@ -31,7 +34,7 @@ Now open a new shell, restart or `source` your file and you should be ready to g
 ### warp
 
 ```
-wdn WARP-POINT
+wdn WARP_POINT
 ```
 
 So, assuming that you have a warp point `tmp` set to `/tmp`, `wdn tmp` will be equivalent to `cd /tmp`. `wdn proj` would warp you to whatever directory you have set as `proj`.
@@ -39,12 +42,14 @@ So, assuming that you have a warp point `tmp` set to `/tmp`, `wdn tmp` will be e
 ### add
 
 ```
-wdn add NAME DESTINATION
+wdn add WARP_POINT PATH
 ```
 
 For example, `wdn add tmp /tmp` or `wdn add proj ~/dev/myproject`
 
-You don't need the destination argument. If you don't pass it, `wdn` will assume you want to save the current working directory. So let's say you're currently in `~/downloads` on the command line and you run this command:
+If you don't pass a path argument, `wdn` will assume you want to save the current working directory.
+
+So let's say you're currently in `~/downloads` on the command line and you run this command:
 
 ```
 wdn add down
@@ -60,8 +65,18 @@ wdn list
 
 Logs a list of currently saved warp points.
 
+### remove
 
+```
+wdn remove WARP_POINT
+```
 
+Removes a given warp point.
 
+### clear
 
-Other commands and features are as of yet unimplemented.
+```
+wdn clear
+```
+
+Removes **all** warp points.
