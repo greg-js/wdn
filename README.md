@@ -1,19 +1,16 @@
 # wdn
 
-`wdn` is a reimplementation of [wd](https://github.com/mfaerevaag/wd) in Node.
+`wdn` is a reimplementation of [wd](https://github.com/mfaerevaag/wd) in Node. It allows you to create warp points out of directories and then quickly warp (`cd`) to it using a very simple API. `wd` is written for `zsh` though, so if you're on `bash` or a different shell, you're out of luck. Hence this package.
 
-All (or almost all?) of the original software's features have now been reimplemented, but there is as of yet no reason for anyone to use this package over it. The reason is that requiring Node as a dependency for simple command line navigation is quite the stretch, even for a Node-junkie such as myself.
+All (or almost all?) of the original software's features have now been reimplemented, but I *just* found out (a bit late but still..) that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal. That means there is as of yet little reason (outside of already having Node installed but not Ruby) to use this package over it.
 
-Eventually though, I will attempt to implement extra features, which would be a nightmare to deal with in `bash`/`zsh`, the language the original package was written in.
+Eventually though, I will attempt to implement some extra features I had in mind, since I've already gone this far anyway, and my `zsh`/`ruby` scripting skills are close to non-existent.
 
-So please don't send me your Node-hatemail and do use the excellent [wd](https://github.com/mfaerevaag/wd) if you use `zsh` and want a fun and light way to jump around the command line.
-
-Hopefully, the reason for reimplenting this in Node will become clear once I start adding the more interesting features I have in mind for this package.
-
+Oh, and if you believe strongly that it's crazy or stupid to use Node to navigate the file system, then that's fine, I respect your opinion and implore you not to use this. However, if you want a fun and convenient way to jump around the file system using the command-line, and you don't use `zsh` or `ruby`, then `wdn` is your friend :-)
 
 ## installation
 
-First install the package:
+Install the package:
 
 ```
 npm install -g greg-js/wdn
