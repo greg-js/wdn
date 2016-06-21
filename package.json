@@ -15,7 +15,7 @@
   "author": "Gregory Scheerlinck",
   "license": "MIT",
   "engines": {
-    "node": ">=6.0"
+    "node": ">=0.12"
   },
   "dependencies": {
     "chalk": "^1.1.3",

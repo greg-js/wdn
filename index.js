@@ -1,16 +1,16 @@
-const chalk = require('chalk');
-const table = require('text-table');
+var chalk = require('chalk');
+var table = require('text-table');
 
-const add = require('./lib/add');
-const remove = require('./lib/remove');
-const clear = require('./lib/clear');
-const list = require('./lib/list');
+var add = require('./lib/add');
+var remove = require('./lib/remove');
+var clear = require('./lib/clear');
+var list = require('./lib/list');
 
-const displayVersion = () => {
-  console.log(`wdn v${chalk.gray(require('./package.json').version)}`);
+var displayVersion = function() {
+  console.log('wdn v' + chalk.gray(require('./package.json').version));
 };
 
-const displayHelp = () => {
+var displayHelp = function() {
   console.log('Usage: wdn [command] <point>\n\nCommands:')
   console.log(table([
     ['add <point> [dir]', 'Adds a given dir or the current working dir to your warp points (shortcut: a)'],
@@ -25,7 +25,7 @@ const displayHelp = () => {
   console.log('\nFull readme on GitHub: https://github.com/greg-js/wdn');
 };
 
-module.exports = (options) => {
+module.exports = function(options) {
   if (options.version) {
     displayVersion();
   } else if (options.help) {

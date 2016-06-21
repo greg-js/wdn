@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const wdn = require('../');
-const minimist = require('minimist');
-const defaults = {
+var wdn = require('../');
+var minimist = require('minimist');
+var defaults = {
   boolean: [
     'help',
     'version',
@@ -26,13 +26,13 @@ const defaults = {
   }
 };
 
-const keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear'];
+var keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear'];
 
-let options = minimist(process.argv.slice(2), defaults);
-const firstArg = (options._.length) ? options._[0] : null;
+var options = minimist(process.argv.slice(2), defaults);
+var firstArg = (options._.length) ? options._[0] : null;
 
 // allow cli options without leading dash and rebuild options
-if (keywords.includes(firstArg)) {
+if (keywords.indexOf(firstArg) !== -1) {
   if (/^help$|^h$/.test(firstArg)) {
     options.help = options.h = true;
     options._ = options._.slice(1);
