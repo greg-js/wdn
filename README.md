@@ -2,9 +2,7 @@
 
 `wdn` is a reimplementation of [wd](https://github.com/mfaerevaag/wd) in Node. It allows you to create warp points out of directories and then quickly warp (`cd`) to it using a very simple API. `wd` is written for `zsh` though, so if you're on `bash` or a different shell, you're out of luck. Hence this package.
 
-All (or almost all?) of the original software's features have now been reimplemented, but I *just* found out (a bit late but still..) that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal. That means there is as of yet little reason (outside of already having Node installed but not Ruby) to use this package over it.
-
-Eventually though, I will attempt to implement some extra features I had in mind, since I've already gone this far anyway, and my `zsh`/`ruby` scripting skills are close to non-existent.
+I found out after I started this that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal of a `wd` that works in all shells. Check it out as well before you decide to use this!
 
 Oh, and if you believe strongly that it's crazy or stupid to use Node to navigate the file system, then that's fine, I respect your opinion and implore you not to use this. However, if you want a fun and convenient way to jump around the file system using the command-line, and you don't use `zsh` or `ruby`, then `wdn` is your friend :-)
 
@@ -58,6 +56,21 @@ This will add the `down` warp point and set it to `~/downloads`
 
 ```
 wdn list
+```
+
+### exec
+
+```
+wdn exec WARP_POINT COMMAND
+```
+
+Executes arbitrary commands in the warp point dir. Caution as this hasn't been exhaustively tested yet.
+
+Example:
+
+```
+wdn exec mypoint ls -al
+wdn exec anotherpoint du -sh
 ```
 
 Logs a list of currently saved warp points.
