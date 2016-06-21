@@ -1,18 +1,26 @@
 # wdn
 
-`wdn` is a reimplementation of [wd](https://github.com/mfaerevaag/wd) in Node. It allows you to create warp points out of directories and then quickly warp (`cd`) to it using a very simple API. `wd` is written for `zsh` though, so if you're on `bash` or a different shell, you're out of luck. Hence this package, which works in `bash` as well as in `zsh`. It might work in other shells too, but I haven't tested it yet.
+`wdn` is a Node.js reimplementation of the [wd](https://github.com/mfaerevaag/wd) for `zsh`. It allows you to create warp points out of directories and then quickly warp (`cd`) to them using a very simple API. This should work in `bash` as well as in `zsh`and *might* work in other shells too, but I haven't tested it yet.
 
 I found out after I started this that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal of a `wd` that works in all shells. Check it out as well before you decide to use this!
 
 Oh, and if you believe strongly that it's crazy or stupid to use Node to navigate the file system, then that's fine, I respect your opinion and implore you not to use this. However, if you want a fun and convenient way to jump around the file system using the command-line, and you don't use `zsh` or `ruby`, then `wdn` is your friend :-)
 
-## installation
+## requirements
 
-Install the package:
+- Node v0.12 or above.
+- npm v2.15 or above.
+
+Install it using your package manager or [nvm](https://github.com/creationix/nvm).
+
+This won't work on Windows, unless *maybe* if you run native bash.
+
+## installation
 
 ```
 npm install -g wdn
 ```
+(note: if you installed Node and npm with your package manager and not with `nvm`, you will probably need to `sudo` it)
 
 Then put this in your `.bashrc`/`.zshrc`:
 
@@ -22,7 +30,13 @@ wdn() {
 }
 ```
 
-Now open a new shell, restart or `source` your file and you should be ready to go.
+Now open a new shell, reboot or `source` your file and you should be ready to go.
+
+## differences between this package and others like it
+
+The main differences right now are the `exec` command and the fact that `wdn` has a slightly different API compared to the original `wd` and `warp-dir`. For example, `wd ls` is used for listing the contents of a warp point, whereas `wdn ls` lists all warp points.
+
+You can accomplish `wd ls` with `wdn` using `exec`/`e`: `wdn e WARP_POINT ls`
 
 ## usage
 
@@ -32,33 +46,65 @@ Now open a new shell, restart or `source` your file and you should be ready to g
 wdn WARP_POINT
 ```
 
-So, assuming that you have a warp point `tmp` set to `/tmp`, `wdn tmp` will be equivalent to `cd /tmp`. `wdn proj` would warp you to whatever directory you have set as `proj`.
+Warps to a given warp point.
 
-### add
+Example:
+
+```
+[~]$ wdn add tmp /tmp
+New warp point set:
+    tmp   =>    /tmp
+[~]$ wdn tmp
+[/tmp] $
+```
+
+Assuming you have a warp point `tmp` set to `/tmp`, `wdn tmp` is equivalent to `cd /tmp`.
+
+### `help` (alias `h`)
+
+```
+wdn help
+```
+
+Prints out a help message to the console.
+
+### `add` (alias `a`)
 
 ```
 wdn add WARP_POINT PATH
 ```
 
-For example, `wdn add tmp /tmp` or `wdn add proj ~/dev/myproject`
+Adds a new warp point and sets it to the supplied `path` or to the current working directory.
 
-If you don't pass a path argument, `wdn` will assume you want to save the current working directory.
-
-So let's say you're currently in `~/downloads` on the command line and you run this command:
+Examples:
 
 ```
-wdn add down
+[~]$ wdn add tmp /tmp
+[~]$ wdn add proj ~/dev/myproject
+[~]$ wdn add home
+[~]$ wdn list
+tmp   =>  /tmp
+proj  =>  ~/dev/myproject
+home  =>  ~
 ```
 
-This will add the `down` warp point and set it to `~/downloads`
-
-### list
+### `list` (alias `ls`)
 
 ```
 wdn list
 ```
 
-### exec
+Prints a list of the currently saved warp points.
+
+### `show` (alias `s`)
+
+```
+wdn show WARP_POINT/DIR
+```
+
+Shows the saved dir for a given warp point or all warp points that point to a given directory. If run without any arguments, it is equivalent to `wdn show $(pwd)`
+
+### `exec` (alias `e`)
 
 ```
 wdn exec WARP_POINT COMMAND
@@ -73,9 +119,7 @@ wdn exec mypoint ls -al
 wdn exec anotherpoint du -sh
 ```
 
-Logs a list of currently saved warp points.
-
-### remove
+### `remove` (alias `rm`)
 
 ```
 wdn remove WARP_POINT
@@ -91,6 +135,18 @@ wdn clear
 
 Removes **all** warp points.
 
+### `version` (alias `v`)
+
+```
+wdn version
+```
+
+Prints the current version of `wdn` to the console.
+
 ## Where are the warp points stored?
 
 They're in `~/.config/wdn`
+
+## Notes
+
+Aside from the aliases, you can also use `wdn` with POSIX-style single or double dash option arguments. In other words, `wdn add` is equivalent to `wdn a`, `wdn -a`, `wdn --add`, and even `wdn --a` and `wdn -add`.
