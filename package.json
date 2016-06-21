@@ -4,16 +4,19 @@
   "description": "warp directory - node edition",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint index.js */*.js"
   },
   "keywords": [
     "wd",
+    "wdn",
     "warp",
     "commandline",
     "navigation"
   ],
   "author": "Gregory Scheerlinck",
   "license": "MIT",
+  "preferGlobal": "true",
   "engines": {
     "node": ">=0.12"
   },
