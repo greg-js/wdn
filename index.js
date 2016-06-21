@@ -41,7 +41,7 @@ module.exports = function(options) {
   } else if (options.show) {
     show(options.show);
   } else if (options.add) {
-    add(options.add);
+    add(options.add, options.args);
   } else {
     console.error(chalk.red('Invalid syntax.\n'));
     displayHelp();
