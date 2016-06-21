@@ -55,7 +55,7 @@ Example:
 New warp point set:
     tmp   =>    /tmp
 [~]$ wdn tmp
-[/tmp] $
+[/tmp]$
 ```
 
 Assuming you have a warp point `tmp` set to `/tmp`, `wdn tmp` is equivalent to `cd /tmp`.
