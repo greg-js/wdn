@@ -14,7 +14,8 @@ var defaults = {
     v: 'version',
     ls: 'list',
     a: 'add',
-    rm: 'remove'
+    rm: 'remove',
+    s: 'show'
   },
   default: {
     help: false,
@@ -22,11 +23,12 @@ var defaults = {
     list: false,
     clear: false,
     add: null,
-    remove: null
+    remove: null,
+    show: null
   }
 };
 
-var keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear'];
+var keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear', 'show', 's'];
 
 var options = minimist(process.argv.slice(2), defaults);
 var firstArg = (options._.length) ? options._[0] : null;
@@ -45,10 +47,13 @@ if (keywords.indexOf(firstArg) !== -1) {
   } else if (/^clear$/.test(firstArg)) {
     options.clear = true;
     options._ = options._.slice(1);
+  } else if (/^show$|^s$/.test(firstArg)) {
+    options.show = options.s = options._[1] || process.cwd();
+    options._ = options._.slice(2);
   } else if (/^add$|^a$/.test(firstArg)) {
     options.add = options.a = options._[1];
     options._ = options._.slice(2);
-  } else if (/^remove$|^rm$/.test(firstArg)){
+  } else if (/^remove$|^rm$/.test(firstArg)) {
     options.remove = options.rm = options._[1];
     options._ = options._.slice(2);
   }
@@ -61,5 +66,6 @@ wdn({
   list: options.list,
   clear: options.clear,
   add: options.add,
-  remove: options.remove
+  remove: options.remove,
+  show: options.show
 });
