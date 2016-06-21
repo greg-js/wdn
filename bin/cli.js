@@ -7,7 +7,8 @@ var defaults = {
     'help',
     'version',
     'list',
-    'clear'
+    'clear',
+    'clean'
   ],
   alias: {
     h: 'help',
@@ -15,20 +16,24 @@ var defaults = {
     ls: 'list',
     a: 'add',
     rm: 'remove',
-    s: 'show'
+    'rm-all': 'clear',
+    'remove-all': 'clear',
+    s: 'show',
+    x: 'clean'
   },
   default: {
     help: false,
     version: false,
     list: false,
     clear: false,
+    clean: false,
     add: null,
     remove: null,
     show: null
   }
 };
 
-var keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear', 'show', 's'];
+var keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear', 'rm-all', 'remove-all', 'show', 's', 'clean', 'x'];
 
 var options = minimist(process.argv.slice(2), defaults);
 var firstArg = (options._.length) ? options._[0] : null;
@@ -44,8 +49,11 @@ if (keywords.indexOf(firstArg) !== -1) {
   } else if (/^list|^ls$/.test(firstArg)) {
     options.list = options.ls = true;
     options._ = options._.slice(1);
-  } else if (/^clear$/.test(firstArg)) {
+  } else if (/^clear$|^rm\-all$|^remove\-all$/.test(firstArg)) {
     options.clear = true;
+    options._ = options._.slice(1);
+  } else if (/^clean$|^x$/.test(firstArg)) {
+    options.clean = true;
     options._ = options._.slice(1);
   } else if (/^show$|^s$/.test(firstArg)) {
     options.show = options.s = options._[1] || process.cwd();
@@ -67,5 +75,6 @@ wdn({
   clear: options.clear,
   add: options.add,
   remove: options.remove,
-  show: options.show
+  show: options.show,
+  clean: options.clean
 });

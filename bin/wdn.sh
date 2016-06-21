@@ -18,8 +18,9 @@ function getdir () {
 }
 
 # ridiculous mess for detecting keywords in both bash and zsh
-# tested keywords: help, h, version, v, list, ls, add, a, remove, rm, clear, show, s
-if [[ $1 =~ ^\-?\-?help$ || $1 =~ ^\-?\-?h$ || $1 =~ ^\-?\-?version$ || $1 =~ ^\-?\-?v$ || $1 =~ ^\-?\-?list$ || $1 =~ ^\-?\-?ls$ || $1 =~ ^\-?\-?add$ || $1 =~ ^\-?\-?a$ || $1 =~ ^\-?\-?remove$ || $1 =~ ^\-?\-?rm$ || $1 =~ ^\-?\-?clear$ || $1 =~ ^\-?\-?show$ || $1 =~ ^\-?\-?s$ ]]; then
+# keywords: help, h, version, v, list, ls, add, a, remove,
+#           rm, clear, rm-all, remove-all, show, s, clean, x
+if [[ $1 =~ ^\-?\-?help$ || $1 =~ ^\-?\-?h$ || $1 =~ ^\-?\-?version$ || $1 =~ ^\-?\-?v$ || $1 =~ ^\-?\-?list$ || $1 =~ ^\-?\-?ls$ || $1 =~ ^\-?\-?add$ || $1 =~ ^\-?\-?a$ || $1 =~ ^\-?\-?remove$ || $1 =~ ^\-?\-?rm$ || $1 =~ ^\-?\-?clear$ || $1 =~ ^\-?\-?rm\-all$ || $1 =~ ^\-?\-?remove\-all$ || $1 =~ ^\-?\-?show$ || $1 =~ ^\-?\-?s$ || $1 =~ ^\-?\-?clean$ || $1 =~ ^\-?\-?x$ ]]; then
   node ${WD}/cli.js $@
 # execute commands
 elif [[ $1 =~ ^\-?\-?exec$ || $1 =~ ^\-?\-?e$ ]]; then
