@@ -30,4 +30,3 @@ else
   DIR=$(getdir $1)
   cd $DIR
 fi
-i
