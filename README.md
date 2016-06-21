@@ -1,6 +1,6 @@
 # wdn
 
-`wdn` is a reimplementation of [wd](https://github.com/mfaerevaag/wd) in Node. It allows you to create warp points out of directories and then quickly warp (`cd`) to it using a very simple API. `wd` is written for `zsh` though, so if you're on `bash` or a different shell, you're out of luck. Hence this package.
+`wdn` is a reimplementation of [wd](https://github.com/mfaerevaag/wd) in Node. It allows you to create warp points out of directories and then quickly warp (`cd`) to it using a very simple API. `wd` is written for `zsh` though, so if you're on `bash` or a different shell, you're out of luck. Hence this package, which works in `bash` as well as in `zsh`. It might work in other shells too, but I haven't tested it yet.
 
 I found out after I started this that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal of a `wd` that works in all shells. Check it out as well before you decide to use this!
 
@@ -11,7 +11,7 @@ Oh, and if you believe strongly that it's crazy or stupid to use Node to navigat
 Install the package:
 
 ```
-npm install -g greg-js/wdn
+npm install -g wdn
 ```
 
 Then put this in your `.bashrc`/`.zshrc`:
@@ -66,7 +66,7 @@ wdn exec WARP_POINT COMMAND
 
 Executes arbitrary commands in the warp point dir. Caution as this hasn't been exhaustively tested yet.
 
-Example:
+Examples:
 
 ```
 wdn exec mypoint ls -al
@@ -90,3 +90,7 @@ wdn clear
 ```
 
 Removes **all** warp points.
+
+## Where are the warp points stored?
+
+They're in `~/.config/wdn`
