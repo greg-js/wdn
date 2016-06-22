@@ -11,10 +11,10 @@ fi
 function getdir () {
   local warp="$(node ${WD}/../lib/warp.js $1)"
   if [[ $warp == "undefined" ]]; then
-    echo $arg is not a valid warp point
     exit 1
   fi
   echo $warp
+  exit 0
 }
 
 # ridiculous mess for detecting keywords in both bash and zsh
@@ -22,12 +22,17 @@ function getdir () {
 #           rm, clear, rm-all, remove-all, show, s, clean, x
 if [[ $1 =~ ^\-?\-?help$ || $1 =~ ^\-?\-?h$ || $1 =~ ^\-?\-?version$ || $1 =~ ^\-?\-?v$ || $1 =~ ^\-?\-?list$ || $1 =~ ^\-?\-?ls$ || $1 =~ ^\-?\-?add$ || $1 =~ ^\-?\-?a$ || $1 =~ ^\-?\-?remove$ || $1 =~ ^\-?\-?rm$ || $1 =~ ^\-?\-?clear$ || $1 =~ ^\-?\-?rm\-all$ || $1 =~ ^\-?\-?remove\-all$ || $1 =~ ^\-?\-?show$ || $1 =~ ^\-?\-?s$ || $1 =~ ^\-?\-?clean$ || $1 =~ ^\-?\-?x$ ]]; then
   node ${WD}/cli.js $@
-# execute commands
+# execute commands by getting the dir and evaluating the remaining arguments
+# as a command, passing it as stdin to the current shell
 elif [[ $1 =~ ^\-?\-?exec$ || $1 =~ ^\-?\-?e$ ]]; then
   DIR=$(getdir $2)
   echo "${@:3} $DIR" | $SHELL -
-# warp in all other cases
+# warp in all other cases unless the warp dir doesn't exist
 else
   DIR=$(getdir $1)
-  cd $DIR
+  if [[ $(echo $?) -ne 0 ]]; then
+    echo -e "\e[90m$1\033[39m is not a valid warp point"
+  else
+    cd $DIR
+  fi
 fi
