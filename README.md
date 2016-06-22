@@ -135,6 +135,14 @@ wdn clear
 
 Removes **all** warp points.
 
+### `clean` (alias `x`)
+
+```
+wdn clean
+```
+
+Removes all warp points that have broken paths, ie the ones for which the stored path is inaccessible. Warp points with working paths are unaffected.
+
 ### `version` (alias `v`)
 
 ```
