@@ -12,6 +12,8 @@ function getdir () {
   local warp="$(node ${WD}/../lib/warp.js $1)"
   if [[ $warp == "undefined" ]]; then
     exit 1
+  elif [[ $warp == "inaccessible" ]]; then
+    exit 2
   fi
   echo $warp
   exit 0
@@ -30,8 +32,12 @@ elif [[ $1 =~ ^\-?\-?exec$ || $1 =~ ^\-?\-?e$ ]]; then
 # warp in all other cases unless the warp dir doesn't exist
 else
   DIR=$(getdir $1)
-  if [[ $(echo $?) -ne 0 ]]; then
-    echo -e "\e[90m$1\033[39m is not a valid warp point"
+  CODE=$(echo $?)
+
+  if [[ $CODE -eq 1 ]]; then
+    echo -e "\e[90m$1\e[39m is not a valid warp point"
+  elif [[ $CODE -eq 2 ]]; then
+    echo -e "The path for \e[90m$1\e[39m is inaccessible"
   else
     cd $DIR
   fi
