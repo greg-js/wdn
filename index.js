@@ -7,6 +7,7 @@ var clear = require('./lib/clear');
 var list = require('./lib/list');
 var show = require('./lib/show');
 var clean = require('./lib/clean');
+var ssh = require('./lib/ssh');
 
 var displayVersion = function() {
   console.log('wdn v' + chalk.gray(require('./package.json').version));
@@ -23,6 +24,7 @@ var displayHelp = function() {
     ['list', 'Prints all currently stored warp points to the console (alias: ls)'],
     ['remove <point>', 'Removes a given warp point (alias: rm)'],
     ['show [point/dir]', 'Shows the path for a point or all points for a path or the current dir (alias: s)'],
+    ['ssh [set/warp/remove/clear] <name>', 'Warps to, sets and removes ssh destinations'],
     ['version', 'Prints the current version (alias: v)']
   ]));
   console.log('\nwdn <point> to warp to a given point');
@@ -52,8 +54,10 @@ module.exports = function(options) {
     show(local, options.show, options.force);
   } else if (options.add) {
     add(local, options.add, options.args, options.force);
+  } else if (options.ssh) {
+    ssh(options.args);
   } else {
     console.error('Invalid syntax.\n');
     displayHelp();
   }
-}
+};

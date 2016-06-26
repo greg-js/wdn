@@ -9,7 +9,8 @@ var defaults = {
     'list',
     'clear',
     'clean',
-    'force'
+    'force',
+    'ssh'
   ],
   alias: {
     h: 'help',
@@ -32,11 +33,12 @@ var defaults = {
     force: false,
     add: null,
     remove: null,
-    show: null
+    show: null,
+    ssh: false
   }
 };
 
-var keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear', 'rm-all', 'remove-all', 'show', 's', 'clean', 'x'];
+var keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear', 'rm-all', 'remove-all', 'show', 's', 'clean', 'x', 'ssh'];
 
 var options = minimist(process.argv.slice(2), defaults);
 var firstArg = (options._.length) ? options._[0] : null;
@@ -67,6 +69,9 @@ if (keywords.indexOf(firstArg) !== -1) {
   } else if (/^remove$|^rm$/.test(firstArg)) {
     options.remove = options.rm = options._[1];
     options._ = options._.slice(2);
+  } else if (/^ssh$/.test(firstArg)) {
+    options.ssh = true;
+    options._ = options._.slice(1);
   }
 }
 
@@ -80,5 +85,6 @@ wdn({
   remove: options.remove,
   show: options.show,
   clean: options.clean,
-  force: options.force
+  force: options.force,
+  ssh: options.ssh
 });
