@@ -1,6 +1,6 @@
 {
   "name": "wdn",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "warp directory - node edition",
   "main": "index.js",
   "bugs": {
