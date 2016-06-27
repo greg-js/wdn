@@ -151,6 +151,12 @@ wdn version
 
 Prints the current version of `wdn` to the console.
 
+### `-f`/`--force` option
+
+You can run mostof the commands with the `-f`/`--force` option. In the case of `add`, `clean`, `clear` and `remove`, it causes the output to be suppressed and prompts to be ignored (ie, existing points will be automatically overwritten).
+
+In the case of `list` and `show`, output will consist of unformatted paths so you could conceivably use it for composing complex commands on the command line using the warp points. For example: `cp $(wdn show mypoint -f)/* $(wdn show anotherpoint -f)`
+
 ## Where are the warp points stored?
 
 They're in `~/.config/wdn`

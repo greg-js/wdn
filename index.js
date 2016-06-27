@@ -25,7 +25,8 @@ var displayHelp = function() {
     ['show [point/dir]', 'Shows the path for a point or all points for a path or the current dir (alias: s)'],
     ['version', 'Prints the current version (alias: v)']
   ]));
-  console.log('\nTo warp to a given point:\nwdn <point>');
+  console.log('\nwdn <point> to warp to a given point');
+  console.log('\n-f/--force option suppresses output & prompt. With `show` and `list`, it outputs unformatted paths');
   console.log('\nFull readme on GitHub: https://github.com/greg-js/wdn');
 };
 
@@ -35,19 +36,19 @@ module.exports = function(options) {
   } else if (options.help) {
     displayHelp();
   } else if (options.list) {
-    list();
+    list(options.force);
   } else if (options.clear) {
-    clear();
+    clear(options.force);
   } else if (options.clean) {
-    clean();
+    clean(options.force);
   } else if (options.remove) {
-    remove(options.remove);
+    remove(options.remove, options.force);
   } else if (options.show) {
-    show(options.show);
+    show(options.show, options.force);
   } else if (options.add) {
-    add(options.add, options.args);
+    add(options.add, options.args, options.force);
   } else {
-    console.error(chalk.red('Invalid syntax.\n'));
+    console.error('Invalid syntax.\n');
     displayHelp();
   }
 }

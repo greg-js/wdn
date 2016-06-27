@@ -8,7 +8,8 @@ var defaults = {
     'version',
     'list',
     'clear',
-    'clean'
+    'clean',
+    'force'
   ],
   alias: {
     h: 'help',
@@ -19,7 +20,8 @@ var defaults = {
     'rm-all': 'clear',
     'remove-all': 'clear',
     s: 'show',
-    x: 'clean'
+    x: 'clean',
+    f: 'force'
   },
   default: {
     help: false,
@@ -27,6 +29,7 @@ var defaults = {
     list: false,
     clear: false,
     clean: false,
+    force: false,
     add: null,
     remove: null,
     show: null
@@ -76,5 +79,6 @@ wdn({
   add: options.add,
   remove: options.remove,
   show: options.show,
-  clean: options.clean
+  clean: options.clean,
+  force: options.force
 });

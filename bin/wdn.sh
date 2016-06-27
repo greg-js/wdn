@@ -10,7 +10,7 @@ fi
 # get warp dir function
 function getdir () {
   local warp="$(node ${WD}/../lib/warp.js $1)"
-  if [[ $warp == "undefined" ]]; then
+  if [[ $warp == "null" || $warp == "undefined" ]]; then
     exit 1
   elif [[ $warp == "inaccessible" ]]; then
     exit 2
