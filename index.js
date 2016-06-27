@@ -31,22 +31,27 @@ var displayHelp = function() {
 };
 
 module.exports = function(options) {
+  // local is the default scope
+  // in the upcoming ssh() function, the functions may be called with
+  // different (remote hosts) scopes
+  var local = 'local';
+
   if (options.version) {
     displayVersion();
   } else if (options.help) {
     displayHelp();
   } else if (options.list) {
-    list(options.force);
+    list(local, options.force);
   } else if (options.clear) {
-    clear(options.force);
+    clear(local, options.force);
   } else if (options.clean) {
-    clean(options.force);
+    clean(local, options.force);
   } else if (options.remove) {
-    remove(options.remove, options.force);
+    remove(local, options.remove, options.force);
   } else if (options.show) {
-    show(options.show, options.force);
+    show(local, options.show, options.force);
   } else if (options.add) {
-    add(options.add, options.args, options.force);
+    add(local, options.add, options.args, options.force);
   } else {
     console.error('Invalid syntax.\n');
     displayHelp();

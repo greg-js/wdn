@@ -9,7 +9,7 @@ fi
 
 # get warp dir function
 function getdir () {
-  local warp="$(node ${WD}/../lib/warp.js $1)"
+  local warp="$(node ${WD}/../lib/warp.js $1 $2)"
   if [[ $warp == "null" || $warp == "undefined" ]]; then
     exit 1
   elif [[ $warp == "inaccessible" ]]; then
@@ -27,11 +27,11 @@ if [[ $1 =~ ^\-?\-?help$ || $1 =~ ^\-?\-?h$ || $1 =~ ^\-?\-?version$ || $1 =~ ^\
 # execute commands by getting the dir and evaluating the remaining arguments
 # as a command, passing it as stdin to the current shell
 elif [[ $1 =~ ^\-?\-?exec$ || $1 =~ ^\-?\-?e$ ]]; then
-  DIR=$(getdir $2)
+  DIR=$(getdir local $2)
   echo "${@:3} $DIR" | $SHELL -
 # warp in all other cases unless the warp dir doesn't exist
 else
-  DIR=$(getdir $1)
+  DIR=$(getdir local $1)
   CODE=$(echo $?)
 
   if [[ $CODE -eq 1 ]]; then

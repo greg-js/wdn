@@ -1,5 +1,7 @@
 # wdn
 
+(if you update from v2.x to v3.x, you *will* lose your saved warp points due to a backwards-incompatible change in how the warp points are stored)
+
 `wdn` is a Node.js reimplementation of the [wd](https://github.com/mfaerevaag/wd) for `zsh`. It allows you to create warp points out of directories and then quickly warp (`cd`) to them using a very simple API. This should work in `bash` as well as in `zsh`and *might* work in other shells too, but I haven't tested it yet.
 
 I found out after I started this that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal of a `wd` that works in all shells. Check it out as well before you decide to use this!
@@ -20,7 +22,8 @@ This won't work on Windows, unless *maybe* if you run native bash.
 ```
 npm install -g wdn
 ```
-(note: if you installed Node and npm with your package manager and not with `nvm`, you will probably need to `sudo` it)
+
+(read [this](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md) or install [nvm](https://github.com/creationix/nvm) if you find you need `sudo` to install global packages and dislike it)
 
 Then put this in your `.bashrc`/`.zshrc`:
 
@@ -34,9 +37,11 @@ Now open a new shell, reboot or `source` your file and you should be ready to go
 
 ## differences between this package and others like it
 
-The main differences right now are the `exec` command and the fact that `wdn` has a slightly different API compared to the original `wd` and `warp-dir`. For example, `wd ls` is used for listing the contents of a warp point, whereas `wdn ls` lists all warp points.
+The main differences right now are `wdn` being somewhat slower, the `exec` command and the fact that `wdn` has a slightly different API compared to the original `wd` and `warp-dir`. For example, `wd ls` is used for listing the contents of a warp point, whereas `wdn ls` lists all warp points.
 
-You can accomplish `wd ls` with `wdn` using `exec`/`e`: `wdn e WARP_POINT ls`
+You can accomplish `wd ls` with `wdn` using `exec`/`e`: `wdn e WARP_POINT ls`.
+
+In future versions of `wdn`, additional features will be added.
 
 ## usage
 
@@ -159,7 +164,7 @@ In the case of `list` and `show`, output will consist of unformatted paths so yo
 
 ## Where are the warp points stored?
 
-They're in `~/.config/wdn`
+Your local warp points are in `~/.config/wdn/wdn`. Remote warp points will be implemented later.
 
 ## Notes
 
