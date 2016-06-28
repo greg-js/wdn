@@ -17,6 +17,8 @@ Install it using your package manager or [nvm](https://github.com/creationix/nvm
 
 This won't work on Windows, unless *maybe* if you run native bash.
 
+If you want to use the `ssh` feature, you also need an [ssh config file](http://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/) in `~/.ssh.config` (system-wide ssh config not yet supported but I'll add it soon).
+
 ## installation
 
 ```
@@ -37,11 +39,11 @@ Now open a new shell, reboot or `source` your file and you should be ready to go
 
 ## differences between this package and others like it
 
-The main differences right now are `wdn` being somewhat slower, the `exec` command and the fact that `wdn` has a slightly different API compared to the original `wd` and `warp-dir`. For example, `wd ls` is used for listing the contents of a warp point, whereas `wdn ls` lists all warp points.
+`wdn` is slower and has a slightly different API compared to the original `wd` and `warp-dir`. It also doesn't have an `ls` command like they do.
 
-You can accomplish `wd ls` with `wdn` using `exec`/`e`: `wdn e WARP_POINT ls`.
+On the flip side, `wdn` can execute arbitrary commands in any point with `wdn exec`/`wdn e`, so `wd mypoint ls` yields the same as `wd exec mypoint ls`, and with `wdn`, you can add any option you like or execute different commands.
 
-In future versions of `wdn`, additional features will be added.
+Also, `wdn` supports warp points for your remote hosts as well. It reads your `~/.ssh/config` and lets you `add`, `list`, `show`, `remove` and `clear` for every host you have set up. Of course you can warp to them too, and you'll `cd` to the correct directory automatically right after connecting.
 
 ## usage
 
@@ -148,6 +150,43 @@ wdn clean
 
 Removes all warp points that have broken paths, ie the ones for which the stored path is inaccessible. Warp points with working paths are unaffected.
 
+### `ssh`
+
+Note: you **must** configure your `ssh` remote destinations in a config file at `~/.ssh/config`. Do a `man ssh config` to read more or check out [this article](http://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/).
+
+`wdn` reads your `ssh config` and stores the warp points for every host you have separately.
+
+#### `add`/`list`/`show`/`remove`/`clear`
+
+```
+wdn ssh HOST add WARP_POINT PATH
+wdn ssh HOST list
+wdn ssh HOST show WARP_POINT/PATH
+wdn ssh HOST remove WARP_POINT
+wdn ssh HOST clear
+```
+
+The API is pretty much the same as the one for managing local warp points. Just prefix with `wdn ssh YOUR_HOST` (again, set in `~/.ssh/config`).
+
+#### Warping to remote warp points
+
+```
+wdn ssh HOST WARP_POINT
+```
+
+#### example
+
+Let's say you have a `awesomeserver` host set up in your ssh config, and you have a cool project there in `~/dev/projects/cool_project` and you want a warp point to it, and (why not?) one to `/tmp` as well. Here's what you could do:
+
+```
+wdn ssh awesomeserver add cool dev/projects/cool_project
+wdn ssh asesomeserver add tmp /tmp
+```
+
+Now you can `wdn ssh awesomeserver cool` or `wdn ssh asesomeserver tmp` and it will `ssh` in and get you to your desired location. Useful? Hmm, well, you tell me :-)
+
+Note: For now, `~` and `$HOME` refer to the local $HOME and **not** to the remote one, so use absolute paths or paths relative to the home dir. Also, it will only use `bash` on your remote host, even if you have a different favorite $SHELL there. I might patch this in later though.
+
 ### `version` (alias `v`)
 
 ```
@@ -164,8 +203,14 @@ In the case of `list` and `show`, output will consist of unformatted paths so yo
 
 ## Where are the warp points stored?
 
-Your local warp points are in `~/.config/wdn/wdn`. Remote warp points will be implemented later.
+Your local warp points are in `~/.config/wdn/wdn/local`. Remote warp points are stored in a file in that same folder that will carry the name of your remote host as set in `~/.ssh/config`
 
 ## Notes
 
 Aside from the aliases, you can also use `wdn` with POSIX-style single or double dash option arguments. In other words, `wdn add` is equivalent to `wdn a`, `wdn -a`, `wdn --add`, and even `wdn --a` and `wdn -add`.
+
+## TODO
+
+- Tests!
+- Correctly expand a few common shortcuts and environment variables like `~` and `$HOME` for remote warp points
+- Add support for alternative shells on remote hosts
