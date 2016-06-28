@@ -55,7 +55,7 @@ module.exports = function(options) {
   } else if (options.add) {
     add(local, options.add, options.args, options.force);
   } else if (options.ssh) {
-    ssh(options.args);
+    ssh(options.args, options.force);
   } else {
     console.error('Invalid syntax.\n');
     displayHelp();
