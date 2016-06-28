@@ -16,26 +16,45 @@ var displayVersion = function() {
 var displayHelp = function() {
   console.log('Usage: wdn [command] <point>\n\nCommands:')
   console.log(table([
-    ['add <point> [dir]', 'Adds a given dir or the current working dir to your warp points (alias: a)'],
-    ['clean', 'Removes all warp points with broken paths (alias: x)'],
-    ['clear', 'Deletes all currently stored warp points (alias: rm-all, remove-all)'],
-    ['exec <point> <command>', 'Execute arbitrary command (alias: e)'],
-    ['help', 'Prints this help message (alias: h)'],
-    ['list', 'Prints all currently stored warp points to the console (alias: ls)'],
-    ['remove <point>', 'Removes a given warp point (alias: rm)'],
-    ['show [point/dir]', 'Shows the path for a point or all points for a path or the current dir (alias: s)'],
-    ['ssh [set/warp/remove/clear] <name>', 'Warps to, sets and removes ssh destinations'],
-    ['version', 'Prints the current version (alias: v)']
+    [ 'add <point> [dir]',
+      'Adds a given dir or the current working dir to your warp points (alias: a)'
+    ],
+    [ 'clean',
+      'Removes all warp points with broken paths (alias: x)'
+    ],
+    [ 'clear',
+      'Deletes all currently stored warp points (alias: rm-all, remove-all)'
+    ],
+    [ 'exec <point> <command>',
+      'Execute arbitrary command (alias: e)'
+    ],
+    [ 'help',
+      'Prints this help message (alias: h)'
+    ],
+    [ 'list',
+      'Prints all currently stored warp points to the console (alias: ls)'
+    ],
+    [ 'remove <point>',
+      'Removes a given warp point (alias: rm)'
+    ],
+    [ 'show [point/path]',
+      'Shows the path for a point or all points for a path or the current dir (alias: s)'
+    ],
+    [ 'ssh <host> [add/clear/list/remove/show] <point>',
+      'Warps to and manages remote warp points.'
+    ],
+    [ 'version',
+      'Prints the current version (alias: v)'
+    ]
   ]));
-  console.log('\nwdn <point> to warp to a given point');
-  console.log('\n-f/--force option suppresses output & prompt. With `show` and `list`, it outputs unformatted paths');
+  console.log('\nwdn <point> to warp to a local warp point');
+  console.log('wdn ssh <host> <point> to warp to a remote warp point.')
+  console.log('-f/--force option suppresses prompts and reformats or suppresses output');
   console.log('\nFull readme on GitHub: https://github.com/greg-js/wdn');
 };
 
 module.exports = function(options) {
-  // local is the default scope
-  // in the upcoming ssh() function, the functions may be called with
-  // different (remote hosts) scopes
+  // local is the default scope, alternate scopes are called from `ssh()`
   var local = 'local';
 
   if (options.version) {
