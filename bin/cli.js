@@ -38,7 +38,9 @@ var defaults = {
   }
 };
 
-var keywords = ['help', 'h', 'version', 'v', 'list', 'ls', 'add', 'a', 'remove', 'rm', 'clear', 'rm-all', 'remove-all', 'show', 's', 'clean', 'x', 'ssh'];
+var keywords = [ 'help', 'h', 'version', 'v', 'list', 'ls', 'add',
+                 'a', 'remove', 'rm', 'clear', 'rm-all', 'remove-all',
+                 'show', 's', 'clean', 'x', 'ssh' ];
 
 var options = minimist(process.argv.slice(2), defaults);
 var firstArg = (options._.length) ? options._[0] : null;
