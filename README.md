@@ -1,12 +1,12 @@
-# wdn
-
-(if you update from v2.x to v3.x, you *will* lose your saved warp points due to a backwards-incompatible change in how the warp points are stored)
+# wdn - **w**arp **d**irectories **n**odeJS-style
 
 `wdn` is a Node.js reimplementation of the [wd](https://github.com/mfaerevaag/wd) for `zsh`. It allows you to create warp points out of directories and then quickly warp (`cd`) to them using a very simple API. This should work in `bash` as well as in `zsh`and *might* work in other shells too, but I haven't tested it yet.
 
-I found out after I started this that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal of a `wd` that works in all shells. Check it out as well before you decide to use this!
+I found out after I started this that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal of a `wd` that works in all shells. Check it out as well before you decide to use this, but check out the differences section below because this package has some extra features too!
 
 Oh, and if you believe strongly that it's crazy or stupid to use Node to navigate the file system, then that's fine, I respect your opinion and implore you not to use this. However, if you want a fun and convenient way to jump around the file system using the command-line, and you don't use `zsh` or `ruby`, then `wdn` is your friend :-)
+
+**Note**: if you update from v2.x to v3.x, you *will* lose your saved warp points due to a backwards-incompatible change in how the warp points are stored)
 
 ## requirements
 
@@ -41,11 +41,13 @@ Now open a new shell, reboot or `source` your file and you should be ready to go
 
 `wdn` is slower and has a slightly different API compared to the original `wd` and `warp-dir`. It also doesn't have an `ls` command like they do.
 
-On the flip side, `wdn` can execute arbitrary commands in any point with `wdn exec`/`wdn e`, so `wd mypoint ls` yields the same as `wd exec mypoint ls`, and with `wdn`, you can add any option you like or execute different commands.
+On the flip side, `wdn` can execute arbitrary commands in any point with `wdn exec`/`wdn e`, so `wd mypoint ls` yields the same as `wdn exec mypoint ls`, and with `wdn`, you can add any option you like or execute different commands.
 
 Also, `wdn` supports warp points for your remote hosts as well. It reads your `~/.ssh/config` and lets you `add`, `list`, `show`, `remove` and `clear` for every host you have set up. Of course you can warp to them too, and you'll `cd` to the correct directory automatically right after connecting.
 
 ## usage
+
+A warp point is basically an alias for a certain local or remote path. Create some with `add`, then warp to them. But watch out, because once you warp, you can't starp!
 
 ### warp
 
