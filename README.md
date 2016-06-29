@@ -4,6 +4,8 @@
 
 I found out after I started this that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal of a `wd` that works in all shells. Check it out as well before you decide to use this, but check out the differences section below because this package has some extra features too!
 
+![example](./docs/screen.gif)
+
 Oh, and if you believe strongly that it's crazy or stupid to use Node to navigate the file system, then that's fine, I respect your opinion and implore you not to use this. However, if you want a fun and convenient way to jump around the file system using the command-line, and you don't use `zsh` or `ruby`, then `wdn` is your friend :-)
 
 **Note**: if you update from v2.x to v3.x, you *will* lose your saved warp points due to a backwards-incompatible change in how the warp points are stored)
