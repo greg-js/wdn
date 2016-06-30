@@ -205,6 +205,10 @@ You can run mostof the commands with the `-f`/`--force` option. In the case of `
 
 In the case of `list` and `show`, output will consist of unformatted paths so you could conceivably use it for composing complex commands on the command line using the warp points. For example: `cp $(wdn show mypoint -f)/* $(wdn show anotherpoint -f)`
 
+### `-c`/`--config` option
+
+Supply a custom configuration directory to be used by `wdn` for storing local and remote points. It must be an empty or `node-persist`-like directory. This is mostly for testing.
+
 ## Where are the warp points stored?
 
 Your local warp points are in `~/.config/wdn/wdn/local`. Remote warp points are stored in a file in that same folder that will carry the name of your remote host as set in `~/.ssh/config`
