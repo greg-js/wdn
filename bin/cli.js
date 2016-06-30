@@ -22,7 +22,8 @@ var defaults = {
     'remove-all': 'clear',
     s: 'show',
     x: 'clean',
-    f: 'force'
+    f: 'force',
+    c: 'config'
   },
   default: {
     help: false,
@@ -31,6 +32,7 @@ var defaults = {
     clear: false,
     clean: false,
     force: false,
+    config: null,
     add: null,
     remove: null,
     show: null,
@@ -88,5 +90,6 @@ wdn({
   show: options.show,
   clean: options.clean,
   force: options.force,
+  config: options.config,
   ssh: options.ssh
 });

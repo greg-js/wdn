@@ -62,19 +62,19 @@ module.exports = function(options) {
   } else if (options.help) {
     displayHelp();
   } else if (options.list) {
-    list(local, options.force);
+    list(local, options.force, options.config);
   } else if (options.clear) {
-    clear(local, options.force);
+    clear(local, options.force, options.config);
   } else if (options.clean) {
-    clean(local, options.force);
+    clean(local, options.force, options.config);
   } else if (options.remove) {
-    remove(local, options.remove, options.force);
+    remove(local, options.remove, options.force, options.config);
   } else if (options.show) {
-    show(local, options.show, options.force);
+    show(local, options.show, options.force, options.config);
   } else if (options.add) {
-    add(local, options.add, options.args, options.force);
+    add(local, options.add, options.args, options.force, options.config);
   } else if (options.ssh) {
-    ssh(options.args, options.force);
+    ssh(options.args, options.force, options.config);
   } else {
     console.error('Invalid syntax.\n');
     displayHelp();
