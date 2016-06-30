@@ -1,0 +1,10 @@
+Host foo
+  HostName 0.0.0.0
+  Port 4500
+  User mryellow
+
+# test comment
+Host bar
+  HostName localhost
+  Port 4750
+  User mrbrown
