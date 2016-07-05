@@ -71,6 +71,15 @@ New warp point set:
 
 Assuming you have a warp point `tmp` set to `/tmp`, `wdn tmp` is equivalent to `cd /tmp`.
 
+Since v3.2.0, you can also warp to destinations relative to a point. For example:
+
+```
+[~]$ wdn tmp/foo/bar
+[/tmp/foo/bar]$
+```
+
+Note: just in case you're running this on Windows, you *can* use backslashes (`\`) for your relative paths, as in `wdn tmp\\foo\\bar`, but as you see, you have to use a double backslash for now. If someone wants me to address this, I will, just file a issue.
+
 ### `help` (alias `h`)
 
 ```
