@@ -5,18 +5,17 @@ var rmdir = require('fs').rmdir;
 var path = require('path');
 
 var customConfig = './test/fixtures/custom';
-var add = require('../lib/add');
 var remove = require('../lib/remove');
 var store = require('../lib/store');
 
 var local = 'local';
 
 // function(scope, point, force, config)
-describe('wdn list', function() {
+describe('wdn remove', function() {
 
   it('should remove points', function() {
     expect(store(local, customConfig).get('foo')).to.not.be.ok;
-    add(local, 'foo', ['./test'], true, customConfig);
+    store(local, customConfig).set('foo', './test');
 
     expect(store(local, customConfig).get('foo')).to.be.ok;
 
