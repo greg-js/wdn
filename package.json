@@ -13,6 +13,7 @@
   },
   "scripts": {
     "test": "node_modules/mocha/bin/mocha",
+    "coverage": "node_modules/.bin/istanbul cover _mocha -- -R spec",
     "lint": "eslint index.js */*.js"
   },
   "keywords": [
@@ -37,6 +38,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "istanbul": "^0.4.4",
     "mocha": "^2.5.3"
   }
 }
