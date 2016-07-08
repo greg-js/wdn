@@ -21,7 +21,7 @@ Install it using your package manager or [nvm](https://github.com/creationix/nvm
 
 This won't work on Windows, unless *maybe* if you run native bash.
 
-If you want to use the `ssh` feature, you also need an [ssh config file](http://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/) in `~/.ssh.config` (system-wide ssh config not yet supported but I'll add it soon).
+If you want to use the `ssh` feature, you also need an [ssh config file](http://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/) in `~/.ssh/config` and/or `/etc/ssh/ssh_config`.
 
 ## installation
 
