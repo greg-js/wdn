@@ -20,12 +20,16 @@ describe('wdn clean', function() {
 
   it('shouldn\'t do anything when all points have valid paths', function() {
     expect(clean(local, true, customConfig)).to.be.ok;
+    expect(clean(local, false, customConfig)).to.be.ok;
     expect(store(local, customConfig).length).to.equal(2);
   });
 
   it('should remove points with invalid paths', function() {
     store(local, customConfig).set('baz', '/not/valid');
     expect(clean(local, true, customConfig)).to.be.ok;
+    store(local, customConfig).set('baz', '/not/valid');
+    store(local, customConfig).set('bam', '/not/valid');
+    expect(clean(local, false, customConfig)).to.be.ok;
     expect(store(local, customConfig).length).to.equal(2);
     expect(store(local, customConfig).points()).to.not.include('baz');
   });

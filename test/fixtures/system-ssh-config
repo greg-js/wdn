@@ -1,0 +1,4 @@
+Host bar
+  HostName 192.168.0.1
+  Port 1234
+  User mrgreen

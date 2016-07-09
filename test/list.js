@@ -14,11 +14,17 @@ describe('wdn list', function() {
 
   it('should not return anything when the store is empty', function() {
     expect(list(local, true, customConfig, true)).to.not.be.ok;
+    expect(list(local, false, customConfig, true)).to.not.be.ok;
   });
 
-  it('should get past the logging function when store is not empty', function() {
+  it('should log the contents of the store alphabetically when not empty', function() {
+    var output;
     store(local, customConfig).set('foo', './test');
-    expect(list(local, true, customConfig, true)).to.be.ok;
+    store(local, customConfig).set('bar', './test');
+    output = list(local, false, customConfig, true);
+    expect(output).to.be.ok;
+    expect(output).to.be.an('array');
+    expect(output[0][1]).to.match(/bar/);
   });
 
   after(function(done) {

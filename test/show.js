@@ -24,22 +24,23 @@ describe('wdn show', function() {
   // actual console logged values aren't explicitly tested here
   it('should show the path when given a point', function() {
     expect(show(local, 'foo', true, customConfig)).to.equal(path.resolve('bar'));
-    expect(show(local, 'key', true, customConfig)).to.equal(path.resolve('value'));
+    expect(show(local, 'key', false, customConfig)).to.equal(path.resolve('value'));
   });
 
   it('should show a list of points when given a path', function() {
     var first = show(local, path.resolve('bar'), true, customConfig);
-    var second = show(local, path.resolve('bam'), true, customConfig);
+    var second = show(local, path.resolve('bam'), false, customConfig);
     expect(first).to.be.ok;
     expect(first).to.be.an('array');
     expect(first).to.contain('foo');
     expect(second).to.be.an('array');
-    expect(second).to.contain('baz');
-    expect(second).to.contain('anotherbaz');
+    expect(second[0]).to.match(/baz/);
+    expect(second[1]).to.match(/anotherbaz/);
   });
 
   it('shouldn\'t do anything when passed a value that\'s not a point nor a path', function() {
     expect(show(local, 'nothing', true, customConfig)).to.not.be.ok;
+    expect(show(local, 'nothing', false, customConfig)).to.not.be.ok;
   });
 
   after(function(done) {

@@ -25,6 +25,7 @@ describe('wdn remove', function() {
 
   it('should should not try to remove non-existing points', function() {
     expect(remove(local, 'bar', true, customConfig)).to.not.be.ok;
+    expect(remove(local, 'bar', false, customConfig)).to.not.be.ok;
   });
 
   after(function(done) {

@@ -25,6 +25,17 @@ describe('wdn add', function() {
     expect(foo.path).to.equal(path.resolve(process.cwd(), 'test'));
   });
 
+  it('should default to the current path', function() {
+    var bar;
+    expect(store(local, customConfig).get('bar')).to.not.be.ok;
+    expect(add(local, 'bar', [], false, customConfig)).to.be.ok;
+
+    bar = store(local, customConfig).get('bar');
+    expect(bar).to.be.ok;
+    expect(bar.point).to.equal('bar');
+    expect(bar.path).to.equal(process.cwd());
+  });
+
   it('should add a remote point', function() {
     var foo;
     expect(store(remote, customConfig).get('foo')).to.not.be.ok;
@@ -47,11 +58,14 @@ describe('wdn add', function() {
   });
 
   it('should not accept points with invalid paths', function() {
-    var foo;
-    expect(add(local, 'bar', ['./not/a/valid/path'], true, customConfig)).to.not.be.ok;
+    var baz, bam;
+    expect(add(local, 'baz', ['./not/a/valid/path'], true, customConfig)).to.not.be.ok;
+    expect(add(local, 'bam', ['./not/a/valid/path'], false, customConfig)).to.not.be.ok;
 
-    foo = store(local, customConfig).get('bar');
-    expect(foo).to.be.not.be.ok;
+    baz = store(local, customConfig).get('baz');
+    bam = store(local, customConfig).get('bam');
+    expect(baz).to.not.be.ok;
+    expect(bam).to.not.be.ok;
   });
 
   after(function(done) {
