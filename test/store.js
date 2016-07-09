@@ -100,6 +100,14 @@ describe('store methods', function() {
     expect(paths[1]).to.equal('foo');
   });
 
+  it('should have a clear method', function() {
+    store = require('../lib/store')(local, customConfig);
+    expect(store.length).to.equal(2);
+    store.clear();
+    store = require('../lib/store')(local, customConfig);
+    expect(store.length).to.equal(0);
+  });
+
   after(function(done) {
     rm(path.resolve(customConfig, local), function() {
       rmdir(path.resolve(customConfig), function() {

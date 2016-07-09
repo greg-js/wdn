@@ -5,26 +5,24 @@ var rmdir = require('fs').rmdir;
 var path = require('path');
 
 var customConfig = './test/fixtures/custom';
-var remove = require('../lib/remove');
+var clear = require('../lib/clear');
 var store = require('../lib/store');
 
 var local = 'local';
 
-describe('wdn remove', function() {
+describe('wdn clear', function() {
 
-  it('should remove points', function() {
+  it('should clear all points', function() {
     expect(store(local, customConfig).get('foo')).to.not.be.ok;
     store(local, customConfig).set('foo', './test');
+    store(local, customConfig).set('bar', './test');
+    store(local, customConfig).set('baz', './test');
+    store(local, customConfig).set('bam', './test');
 
     expect(store(local, customConfig).get('foo')).to.be.ok;
+    clear(local, true, customConfig);
 
-    expect(remove(local, 'foo', true, customConfig)).to.be.ok;
-
-    expect(store(local, customConfig).get('foo')).to.not.be.ok;
-  });
-
-  it('should should not try to remove non-existing points', function() {
-    expect(remove(local, 'bar', true, customConfig)).to.not.be.ok;
+    expect(store(local, customConfig).length).to.equal(0);
   });
 
   after(function(done) {
