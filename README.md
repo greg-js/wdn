@@ -1,4 +1,4 @@
-[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php) [![Build Status](https://travis-ci.org/greg-js/wdn.svg?branch=master)](https://travis-ci.org/greg-js/wdn)
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php) [![Build Status](https://travis-ci.org/greg-js/wdn.svg?branch=master)](https://travis-ci.org/greg-js/wdn) [![Coverage Status](https://coveralls.io/repos/github/greg-js/wdn/badge.svg?branch=master)](https://coveralls.io/github/greg-js/wdn?branch=master)
 
 # wdn - **w**arp **d**irectories **n**odeJS-style
 

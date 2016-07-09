@@ -2,3 +2,4 @@ node_modules
 persist
 npm-debug
 coverage
+.coveralls.yml

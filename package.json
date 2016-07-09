@@ -14,6 +14,7 @@
   "scripts": {
     "test": "node_modules/mocha/bin/mocha",
     "coverage": "node_modules/.bin/istanbul cover _mocha -- -R spec",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
     "lint": "eslint index.js */*.js"
   },
   "keywords": [
@@ -38,6 +39,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3"
   }
