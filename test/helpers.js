@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 var expect = require('chai').expect;
 var path = require('path');
+var Promise = require('bluebird');
 
 describe('helper functions >', function() {
   describe('is-valid-path >', function() {
@@ -67,6 +68,25 @@ describe('helper functions >', function() {
         expect(hosts.length).to.equal(1);
         done();
       }, 'invalid/path', customSystemSshConfig );
+    });
+  });
+
+  describe('prompt >', function() {
+
+    var prompt = require('../lib/helpers/prompt');
+
+    it('should return a promise', function() {
+      var prmpt = prompt('foo');
+      expect(prmpt).to.be.an.instanceof(Promise);
+    });
+  });
+
+  describe('is-testing >', function() {
+
+    var isTesting = require('../lib/helpers/is-testing');
+
+    it('should return true when testing', function() {
+      expect(isTesting()).to.be.true;
     });
   });
 });

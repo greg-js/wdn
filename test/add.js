@@ -3,6 +3,7 @@ var expect = require('chai').expect;
 var rm = require('fs').unlink;
 var rmdir = require('fs').rmdir;
 var path = require('path');
+var stdin = require('bdd-stdin');
 
 var customConfig = './test/fixtures/custom';
 var add = require('../lib/add');
@@ -47,7 +48,7 @@ describe('wdn add', function() {
     expect(foo.path).to.equal('test');
   });
 
-  it('should overwrite points', function() {
+  it('should overwrite points (force)', function() {
     var foo;
     expect(add(local, 'foo', ['./docs'], true, customConfig)).to.be.ok;
 
@@ -55,6 +56,23 @@ describe('wdn add', function() {
     expect(foo).to.be.ok;
     expect(foo.point).to.equal('foo');
     expect(foo.path).to.equal(path.resolve(process.cwd(), 'docs'));
+  });
+
+  it('should overwrite points with y-response', function() {
+    stdin('y');
+    return add(local, 'foo', ['./'], false, customConfig)
+      .then(function(res) {
+        expect(res.point).to.equal('foo');
+        expect(res.path).to.equal(path.resolve(process.cwd()));
+      });
+  });
+
+  it('should not overwrite points with n-response', function() {
+    stdin('n');
+    return add(local, 'foo', ['./'], false, customConfig)
+      .then(function(res) {
+        expect(res.point).to.not.be.ok;
+      });
   });
 
   it('should not accept points with invalid paths', function() {

@@ -10,7 +10,6 @@ var store = require('../lib/store');
 
 var local = 'local';
 
-// module.exports = function(scope, arg, force, config) {
 describe('wdn show', function() {
 
   before(function() {
