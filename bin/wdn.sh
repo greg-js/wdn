@@ -9,7 +9,7 @@ fi
 
 # get warp dir function
 function getdir () {
-    local warp="$(node ${WD}/../lib/warp.js $1 $2 $3)"
+    local warp="$(node ${WD}/../lib/warp.js $1 $2)"
     if [[ $warp == "null" || $warp == "undefined" ]]; then
         exit 1
     elif [[ $warp == "inaccessible" ]]; then
@@ -30,7 +30,7 @@ if [[ $1 =~ ^\-?\-?ssh$ ]]; then
     $3 =~ ^\-?^\-?re?mo?v?e?$ || $3 =~ ^\-?\-?sh?o?w?$ ]]; then
     node ${WD}/cli.js $@
   else
-    DIR=$(getdir $2 $3 ssh)
+    DIR=$(getdir $2 $3)
     ssh -t $2 "cd "$DIR"; bash"
   fi
 # ridiculous mess for detecting keywords in both bash and zsh
