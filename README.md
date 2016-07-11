@@ -1,5 +1,4 @@
-[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php) [![Build Status](https://travis-ci.org/greg-js/wdn.svg?branch=master)](https://travis-ci.org/greg-js/wdn) [![Coverage Status](https://coveralls.io/repos/github/greg-js/wdn/badge.svg?branch=master)](https://coveralls.io/github/greg-js/wdn?branch=master)
-
+[![MIT License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/greg-js/wdn.svg?branch=master)](https://travis-ci.org/greg-js/wdn) [![Coverage Status](https://coveralls.io/repos/github/greg-js/wdn/badge.svg?branch=master)](https://coveralls.io/github/greg-js/wdn?branch=master)
 # wdn - **w**arp **d**irectories **n**odeJS-style
 
 `wdn` is a Node.js reimplementation of the [wd](https://github.com/mfaerevaag/wd) for `zsh`. It allows you to create warp points out of directories and then quickly warp (`cd`) to them using a very simple API. This should work in `bash` as well as in `zsh`and *might* work in other shells too, but I haven't tested it yet.
@@ -14,7 +13,7 @@ Oh, and if you believe strongly that it's crazy or stupid to use Node to navigat
 
 ## requirements
 
-- Node v0.12 or above.
+- Node v0.10 or above.
 - npm v2.15 or above.
 
 Install it using your package manager or [nvm](https://github.com/creationix/nvm).
@@ -230,6 +229,5 @@ Aside from the aliases, you can also use `wdn` with POSIX-style single or double
 
 ## TODO
 
-- Tests!
 - Correctly expand a few common shortcuts and environment variables like `~` and `$HOME` for remote warp points
 - Add support for alternative shells on remote hosts

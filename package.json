@@ -1,7 +1,7 @@
 {
   "name": "wdn",
   "version": "3.2.0",
-  "description": "warp directory - node edition",
+  "description": "NodeJS-powered directory warping",
   "main": "index.js",
   "bugs": {
     "url": "https://github.com/greg-js/wdn/issues",
