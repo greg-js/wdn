@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
+require('../lib/setup')();
+
 var wdn = require('../');
 var minimist = require('minimist');
+
 var defaults = {
   boolean: [
     'help',
@@ -42,7 +45,7 @@ var defaults = {
 
 var keywords = [ 'help', 'h', 'version', 'v', 'list', 'ls', 'add',
                  'a', 'remove', 'rm', 'clear', 'rm-all', 'remove-all',
-                 'show', 's', 'clean', 'x', 'ssh' ];
+                 'show', 's', 'clean', 'x', 'ssh', '--setup' ];
 
 var options = minimist(process.argv.slice(2), defaults);
 var firstArg = (options._.length) ? options._[0] : null;

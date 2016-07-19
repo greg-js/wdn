@@ -16,40 +16,51 @@ var displayVersion = function() {
 var displayHelp = function() {
   console.log('Usage: wdn [command] <point>\n\nCommands:')
   console.log(table([
-    [ 'add <point> [dir]',
-      'Adds a given dir or the current working dir to your warp points (alias: a)'
+    [
+      'add <point> [dir]',
+      'Add a new warp point'
     ],
-    [ 'clean',
-      'Removes all warp points with broken paths (alias: x)'
+    [
+      'clean',
+      'Remove warp points with broken paths'
     ],
-    [ 'clear',
-      'Deletes all currently stored warp points (alias: rm-all, remove-all)'
+    [
+      'clear',
+      'Delete all warp points'
     ],
-    [ 'exec <point> <command>',
-      'Execute arbitrary command (alias: e)'
+    [
+      'exec <point> <command>',
+      'Execute arbitrary command at warp point'
     ],
-    [ 'help',
-      'Prints this help message (alias: h)'
+    [
+      'help',
+      'Print this help message'
     ],
-    [ 'list',
-      'Prints all currently stored warp points to the console (alias: ls)'
+    [
+      'list',
+      'Print all warp points to the console'
     ],
-    [ 'remove <point>',
-      'Removes a given warp point (alias: rm)'
+    [
+      'remove <point>',
+      'Remove a warp point'
     ],
-    [ 'show [point/path]',
-      'Shows the path for a point or all points for a path or the current dir (alias: s)'
+    [
+      'show [point/path]',
+      'Show a point\'s path or a path\'s point(s)'
     ],
-    [ 'ssh <host> [add/clear/list/remove/show] <point>',
-      'Warps to and manages remote warp points.'
+    [
+      'ssh <host> [command] <point>',
+      'Warp to and manage remote warp points.'
     ],
-    [ 'version',
-      'Prints the current version (alias: v)'
+    [
+      'version',
+      'Print the current version'
     ]
   ]));
   console.log('\nwdn <point> to warp to a local warp point');
-  console.log('wdn ssh <host> <point> to warp to a remote warp point.')
-  console.log('-f/--force option suppresses prompts and reformats or suppresses output');
+  console.log('wdn ssh <host> <point> to warp to a remote warp point');
+  console.log('-f/--force suppresses or reformats prompts and output');
+  console.log('wdn --setup to install wdn shell function and autocomplete');
   console.log('\nFull readme on GitHub: https://github.com/greg-js/wdn');
 };
 

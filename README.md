@@ -1,7 +1,7 @@
 [![MIT License](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://travis-ci.org/greg-js/wdn.svg?branch=master)](https://travis-ci.org/greg-js/wdn) [![Coverage Status](https://coveralls.io/repos/github/greg-js/wdn/badge.svg?branch=master)](https://coveralls.io/github/greg-js/wdn?branch=master)
 # wdn - **w**arp **d**irectories **n**odeJS-style
 
-`wdn` is a Node.js reimplementation of the [wd](https://github.com/mfaerevaag/wd) for `zsh`. It allows you to create warp points out of directories and then quickly warp (`cd`) to them using a very simple API. This should work in `bash` as well as in `zsh`and *might* work in other shells too, but I haven't tested it yet.
+`wdn` is a Node.js reimplementation of the [wd](https://github.com/mfaerevaag/wd) for `zsh`. It lets you create warp points from directories and then quickly warp (`cd`) to them using a very simple API. This reimplementation should work in `bash` as well as in `zsh`and *might* work in other shells too, but I haven't tested it yet.
 
 I found out after I started this that there is already a [Ruby package](https://github.com/kigster/warp-dir) out there written by kigster which accomplishes the same goal of a `wd` that works in all shells. Check it out as well before you decide to use this, but check out the differences section below because this package has some extra features too!
 
@@ -13,7 +13,7 @@ Oh, and if you believe strongly that it's crazy or stupid to use Node to navigat
 
 ## requirements
 
-- Node v0.10 or above.
+- Node v0.12 or above.
 - npm v2.15 or above.
 
 Install it using your package manager or [nvm](https://github.com/creationix/nvm).
@@ -30,27 +30,29 @@ npm install -g wdn
 
 (read [this](https://github.com/sindresorhus/guides/blob/master/npm-global-without-sudo.md) or install [nvm](https://github.com/creationix/nvm) if you find you need `sudo` to install global packages and dislike it)
 
-Then put this in your `.bashrc`/`.zshrc`:
+Then run this on the command line:
 
 ```
-wdn() {
-  source $(npm root -g)/wdn/bin/wdn.sh
-}
+wdn --setup
 ```
+
+This command will detect your shell and set up the shell function and autocomplete in either your `~/.zshrc` or `~/.bash_profile`.
 
 Now open a new shell, reboot or `source` your file and you should be ready to go.
 
 ## differences between this package and others like it
 
-`wdn` is slower and has a slightly different API compared to the original `wd` and `warp-dir`. It also doesn't have an `ls` command like they do.
+* `wdn` is slower and doesn't aim to be a full drop-in replacement for the original `wd`. It has a slightly different API and lacks `wd` and `warp-dir`'s `ls` command
 
-On the flip side, `wdn` can execute arbitrary commands in any point with `wdn exec`/`wdn e`, so `wd mypoint ls` yields the same as `wdn exec mypoint ls`, and with `wdn`, you can add any option you like or execute different commands.
+* `wdn` can execute arbitrary commands in any point with `wdn exec`/`wdn e`, so `wd mypoint ls` yields the same as `wdn exec mypoint ls`, and with `wdn`, you can add options or execute different commands
 
-Also, `wdn` supports warp points for your remote hosts as well. It reads your `~/.ssh/config` and lets you `add`, `list`, `show`, `remove` and `clear` for every host you have set up. Of course you can warp to them too, and you'll `cd` to the correct directory automatically right after connecting.
+* `wdn` supports remote warp points over `ssh`. It reads your ssh config file and lets you `add`, `list`, `show`, `remove` and `clear` points for every host you have set up. Warping to a remote point results in connecting over `ssh` and immediately `cd`ing to the point. More info about the `ssh` subcommand below
+
+* `wdn` also supports warping to relative destinations. So you can do `wdn myproject/lib` to `cd` to the `lib` subdir of the dir stored in `myproject`
 
 ## usage
 
-A warp point is basically an alias for a certain local or remote path. Create some with `add`, then warp to them. But watch out, because once you warp, you can't starp!
+A warp point is basically an alias for a certain local or remote path. Create some with `add`, then warp to them. But watch out! Once you warp, you can't starp!
 
 ### warp
 
@@ -79,7 +81,7 @@ Since v3.2.0, you can also warp to destinations relative to a point. For example
 [/tmp/foo/bar]$
 ```
 
-Note: just in case you're running this on Windows, you *can* use backslashes (`\`) for your relative paths, as in `wdn tmp\\foo\\bar`, but as you see, you have to use a double backslash for now. If someone wants me to address this, I will, just file a issue.
+Note: just in case you're running this on Windows, you *can* use backslashes (`\`) for your relative paths, as in `wdn tmp\\foo\\bar`, but as you see, you have to use a double backslash for now. If someone wants me to address this, I will, just file an issue.
 
 ### `help` (alias `h`)
 
@@ -123,7 +125,13 @@ Prints a list of the currently saved warp points.
 wdn show WARP_POINT/DIR
 ```
 
-Shows the saved dir for a given warp point or all warp points that point to a given directory. If run without any arguments, it is equivalent to `wdn show $(pwd)`
+Shows the saved dir for a given warp point or all warp points that point to a given directory. If run without any arguments, it is equivalent to `wdn show $(pwd)`.
+
+This command can be useful with the `--force`/`-f` option to quickly get a reference to a point's path. For example:
+
+```
+cp $(wdn show -f project1)/myfile $(wdn show -f project2)
+```
 
 ### `exec` (alias `e`)
 
@@ -131,7 +139,7 @@ Shows the saved dir for a given warp point or all warp points that point to a gi
 wdn exec WARP_POINT COMMAND
 ```
 
-Executes arbitrary commands in the warp point dir. Caution as this hasn't been exhaustively tested yet.
+Executes arbitrary commands in the warp point dir.
 
 Examples:
 
@@ -168,7 +176,7 @@ Removes all warp points that have broken paths, ie the ones for which the stored
 
 Note: you **must** configure your `ssh` remote destinations in a config file at `~/.ssh/config`. Do a `man ssh config` to read more or check out [this article](http://www.cyberciti.biz/faq/create-ssh-config-file-on-linux-unix/).
 
-`wdn` reads your `ssh config` and stores the warp points for every host you have separately.
+`wdn` reads your `ssh config` and stores warp points separately for every host you have set up in your configs.
 
 #### `add`/`list`/`show`/`remove`/`clear`
 
@@ -199,7 +207,7 @@ wdn ssh asesomeserver add tmp /tmp
 
 Now you can `wdn ssh awesomeserver cool` or `wdn ssh asesomeserver tmp` and it will `ssh` in and get you to your desired location. Useful? Hmm, well, you tell me :-)
 
-Note: For now, `~` and `$HOME` refer to the local $HOME and **not** to the remote one, so use absolute paths or paths relative to the home dir. Also, it will only use `bash` on your remote host, even if you have a different favorite $SHELL there. I might patch this in later though.
+Note: For now, `~` and `$HOME` refer to the local $HOME and **not** to the remote one, so use absolute paths or paths relative to the home dir. Also, it will only use `bash` on your remote host, even if you have a different favorite $SHELL there. I might patch this in later though if I can figure out a way to improve this.
 
 ### `version` (alias `v`)
 
@@ -219,9 +227,13 @@ In the case of `list` and `show`, output will consist of unformatted paths so yo
 
 Supply a custom configuration directory to be used by `wdn` for storing local and remote points. It must be an empty or `node-persist`-like directory. This is mostly for testing.
 
+## autocomplete
+
+As of v3.3.0, `wdn` will autocomplete points, ssh hosts and commands. If you're upgrading from a previous version, you'll have to first remove the old `wdn` shell function from your `~/.bashrc`/`~/.bash_profile`/`~/.zshrc` and then run `wdn --setup`.
+
 ## Where are the warp points stored?
 
-Your local warp points are in `~/.config/wdn/wdn/local`. Remote warp points are stored in a file in that same folder that will carry the name of your remote host as set in `~/.ssh/config`
+Your local warp points are in `~/.config/wdn/local`. Remote warp points are stored in a file in that same folder that will carry the name of your remote host as set in `~/.ssh/config`
 
 ## Notes
 
