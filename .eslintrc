@@ -3,7 +3,7 @@
     "rules": {
         "comma-dangle": 0,
         "no-console": 0,
-        "max-len": [ "error", 100 ]
+        "max-len": [ "error", 80 ]
     },
     "env": {
         "node": true
