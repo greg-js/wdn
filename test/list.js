@@ -17,7 +17,8 @@ describe('wdn list', function() {
     expect(list(local, false, customConfig, true)).to.not.be.ok;
   });
 
-  it('should log the contents of the store alphabetically when not empty', function() {
+  it('should log the contents of the store alphabetically'
+     + ' when not empty', function() {
     var output;
     store(local).set('foo', './test');
     store(local).set('bar', './test');

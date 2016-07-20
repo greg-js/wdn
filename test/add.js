@@ -77,8 +77,10 @@ describe('wdn add', function() {
 
   it('should not accept points with invalid paths', function() {
     var baz, bam;
-    expect(add(local, 'baz', ['./not/a/valid/path'], true, customConfig)).to.not.be.ok;
-    expect(add(local, 'bam', ['./not/a/valid/path'], false, customConfig)).to.not.be.ok;
+    expect(add(local, 'baz', ['./not/a/valid/path'], true, customConfig))
+      .to.not.be.ok;
+    expect(add(local, 'bam', ['./not/a/valid/path'], false, customConfig))
+      .to.not.be.ok;
 
     baz = store(local).get('baz');
     bam = store(local).get('bam');

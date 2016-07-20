@@ -52,7 +52,8 @@ describe('helper functions >', function() {
       }, 'invalid/path', 'another/one');
     });
 
-    it('should fall back to the user dir if the system one is invalid', function(done) {
+    it('should fall back to the user dir'
+       + ' if the system one is invalid', function(done) {
       loadSshConfig(function(err, hosts) {
         expect(err).to.not.be.ok;
         expect(hosts).to.be.an('array');
@@ -61,7 +62,8 @@ describe('helper functions >', function() {
       }, customSshConfig, 'invalid/path');
     });
 
-    it('should fall back to the system dir if the user one is invalid', function(done) {
+    it('should fall back to the system dir'
+       + ' if the user one is invalid', function(done) {
       loadSshConfig(function(err, hosts) {
         expect(err).to.not.be.ok;
         expect(hosts).to.be.an('array');

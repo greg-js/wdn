@@ -31,7 +31,8 @@ describe('warp', function() {
     remoteStore.set('Cosmo', 'Kramer');
   });
 
-  it('should log an error message and return false if no point is given', function() {
+  it('should log an error message and return false'
+     + ' if no point is given', function() {
     expect(warp(local)).to.be.false;
   });
 
@@ -47,17 +48,20 @@ describe('warp', function() {
 
   it('should log relative paths for existing local points', function() {
     expect(warp(local, 'wdn/lib', customConfig)).to.equal(path.resolve('lib'));
-    expect(warp(local, 'wdn\\test', customConfig)).to.equal(path.resolve('test'));
+    expect(warp(local, 'wdn\\test', customConfig))
+      .to.equal(path.resolve('test'));
   });
 
-  it('should log inaccessible for an inaccessible local point path', function() {
+  it('should log inaccessible for an'
+     + ' inaccessible local point path', function() {
     expect(warp(local, 'foo', customConfig)).to.equal('inaccessible');
     expect(warp(local, 'wdn/foo/bar', customConfig)).to.equal('inaccessible');
   });
 
   it('should log a remote destination without validating the path', function() {
     expect(warp(remote, 'Jerry', customConfig)).to.equal('Seinfeld');
-    expect(warp(remote, 'Elaine/George/Kramer', customConfig)).to.equal('Benes/George/Kramer');
+    expect(warp(remote, 'Elaine/George/Kramer', customConfig))
+      .to.equal('Benes/George/Kramer');
   });
 
   after(function(done) {

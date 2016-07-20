@@ -19,16 +19,21 @@ describe('wdn ssh', function() {
   });
 
   it('should fail when given a non-existing ssh command', function() {
-    expect(ssh.bind(null, [remote, 'bar'], true, customDir, sshConf)).to.throw(/recognized/);
-    expect(ssh.bind(null, [remote, 'baz'], true, customDir, sshConf)).to.throw(/recognized/);
-    expect(ssh.bind(null, [remote, 'bam'], false, customDir, sshConf)).to.throw(/recognized/);
+    expect(ssh.bind(null, [remote, 'bar'], true, customDir, sshConf))
+      .to.throw(/recognized/);
+    expect(ssh.bind(null, [remote, 'baz'], true, customDir, sshConf))
+      .to.throw(/recognized/);
+    expect(ssh.bind(null, [remote, 'bam'], false, customDir, sshConf))
+      .to.throw(/recognized/);
   });
 
   it('should call the other methods with the remote store', function() {
     ssh([remote, 'add', 'foo', 'bar'], true, customDir, sshConf);
     expect(ssh([remote, 'list'], true, customDir, sshConf)).to.not.be.false;
-    expect(ssh([remote, 'show', 'foo'], true, customDir, sshConf)).to.equal('bar');
-    expect(ssh([remote, 'remove', 'foo'], true, customDir, sshConf)).to.not.be.false;
+    expect(ssh([remote, 'show', 'foo'], true, customDir, sshConf))
+      .to.equal('bar');
+    expect(ssh([remote, 'remove', 'foo'], true, customDir, sshConf))
+      .to.not.be.false;
     ssh([remote, 'add', 'foo', 'bar'], true, customDir, sshConf);
     expect(ssh([remote, 'clear'], true, customDir, sshConf)).to.not.be.false;
     expect(ssh([remote, 'show', 'foo'], true, customDir, sshConf)).to.not.be.ok;
