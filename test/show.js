@@ -6,18 +6,19 @@ var path = require('path');
 
 var customConfig = './test/fixtures/custom';
 var show = require('../lib/show');
-var store = require('../lib/store');
+var store = require('../lib/store')(customConfig);
 
 var local = 'local';
 
 describe('wdn show', function() {
 
   before(function() {
-    store(local, customConfig).set('foo', path.resolve('bar'));
-    store(local, customConfig).set('baz', path.resolve('bam'));
-    store(local, customConfig).set('anotherbaz', path.resolve('bam'));
-    store(local, customConfig).set('key', path.resolve('value'));
-    store(local, customConfig).set('question', path.resolve('answer'));
+    store = store(local);
+    store.set('foo', path.resolve('bar'));
+    store.set('baz', path.resolve('bam'));
+    store.set('anotherbaz', path.resolve('bam'));
+    store.set('key', path.resolve('value'));
+    store.set('question', path.resolve('answer'));
   });
 
   // actual console logged values aren't explicitly tested here

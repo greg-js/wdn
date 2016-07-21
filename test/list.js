@@ -5,7 +5,7 @@ var rmdir = require('fs').rmdir;
 var path = require('path');
 
 var customConfig = './test/fixtures/custom';
-var store = require('../lib/store');
+var store = require('../lib/store')(customConfig);
 var list = require('../lib/list');
 
 var local = 'local';
@@ -19,8 +19,8 @@ describe('wdn list', function() {
 
   it('should log the contents of the store alphabetically when not empty', function() {
     var output;
-    store(local, customConfig).set('foo', './test');
-    store(local, customConfig).set('bar', './test');
+    store(local).set('foo', './test');
+    store(local).set('bar', './test');
     output = list(local, false, customConfig, true);
     expect(output).to.be.ok;
     expect(output).to.be.an('array');

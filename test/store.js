@@ -6,19 +6,19 @@ var cat = require('fs').readFile;
 var path = require('path');
 
 var customConfig = './test/fixtures/custom';
+var testStore = require('../lib/store')(customConfig);
 
 var local = 'local';
 
 describe('store methods', function() {
   var store;
 
-  it('store should be a function', function() {
-    store = require('../lib/store');
-    expect(store).to.be.a('function');
+  it('curried store should be a function', function() {
+    expect(testStore).to.be.a('function');
   });
 
   it('should expose store methods when initialized', function() {
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
     expect(store).to.be.an('object');
     expect(store.get).to.be.a('function');
     expect(store.set).to.be.a('function');
@@ -26,7 +26,7 @@ describe('store methods', function() {
 
   it('should have a set method for setting points', function(done) {
     var setPoint;
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
     expect(store.set).to.be.a('function');
 
     setPoint = store.set('foo', 'bar');
@@ -41,7 +41,7 @@ describe('store methods', function() {
 
   it('should have a get method for getting points', function() {
     var point, noPoint;
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
     expect(store.get).to.be.a('function');
 
     point = store.get('foo');
@@ -55,20 +55,20 @@ describe('store methods', function() {
 
   it('should have a length variable', function() {
     // at this point just one variable had been added so length should be 1
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
     expect(store.length).to.be.a('number');
     expect(store.length).to.equal(1);
     // it won't update unless store is initialized again
     store.set('bar', 'foo');
     expect(store.length).to.equal(1);
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
     expect(store.length).to.equal(2);
   });
 
   it('should have a forEach iterator', function() {
     var arr = [];
     var cb = function(point) { arr.push(point); };
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
 
     expect(store.forEach).to.be.a('function');
     store.forEach(cb);
@@ -78,7 +78,7 @@ describe('store methods', function() {
 
   it('should have a points method', function() {
     var points;
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
     expect(store.points).to.be.a('function');
 
     points = store.points();
@@ -90,7 +90,7 @@ describe('store methods', function() {
 
   it('should have a paths method', function() {
     var paths;
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
     expect(store.paths).to.be.a('function');
 
     paths = store.paths();
@@ -101,10 +101,10 @@ describe('store methods', function() {
   });
 
   it('should have a clear method', function() {
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
     expect(store.length).to.equal(2);
     store.clear();
-    store = require('../lib/store')(local, customConfig);
+    store = testStore(local);
     expect(store.length).to.equal(0);
   });
 

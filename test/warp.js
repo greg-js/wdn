@@ -7,7 +7,7 @@ var path = require('path');
 var customConfig = './test/fixtures/custom';
 
 var warp = require('../lib/warp');
-var store = require('../lib/store');
+var store = require('../lib/store')(customConfig);
 
 var local = 'local';
 var remote = 'remote';
@@ -15,17 +15,20 @@ var remote = 'remote';
 // warping works by console.logging a path or message
 // which then gets read by a bash script (`./bin/wdn.sh`)
 describe('warp', function() {
+  var localStore, remoteStore;
 
   before(function() {
-    store(local, customConfig).set('wdn', process.cwd());
-    store(local, customConfig).set('lib', path.resolve('lib'));
-    store(local, customConfig).set('test', path.resolve('test'));
-    store(local, customConfig).set('foo', '/not/a/real/path');
+    localStore = store(local);
+    localStore.set('wdn', process.cwd());
+    localStore.set('lib', path.resolve('lib'));
+    localStore.set('test', path.resolve('test'));
+    localStore.set('foo', '/not/a/real/path');
 
-    store(remote, customConfig).set('Jerry', 'Seinfeld');
-    store(remote, customConfig).set('Elaine', 'Benes');
-    store(remote, customConfig).set('George', 'Costanza');
-    store(remote, customConfig).set('Cosmo', 'Kramer');
+    remoteStore = store(remote);
+    remoteStore.set('Jerry', 'Seinfeld');
+    remoteStore.set('Elaine', 'Benes');
+    remoteStore.set('George', 'Costanza');
+    remoteStore.set('Cosmo', 'Kramer');
   });
 
   it('should log an error message and return false if no point is given', function() {
